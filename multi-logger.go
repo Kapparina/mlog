@@ -14,7 +14,7 @@ type MultiLogger struct {
 
 func (m MultiLogger) log(level slog.Level, msg interface{}, keysAndValues ...interface{}) {
 	var pcs [1]uintptr
-	runtime.Callers(4, pcs[:])
+	runtime.Callers(3, pcs[:])
 	r := slog.NewRecord(time.Now(), level, msg.(string), pcs[0])
 	r.Add(keysAndValues...)
 	for _, logger := range m.loggers {
